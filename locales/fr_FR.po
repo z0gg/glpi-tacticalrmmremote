@@ -1,0 +1,18 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tacticalrmmremote\n"
+"Language: fr_FR\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "TacticalRMM settings"
+msgstr "Paramètres TacticalRMM"
+
+msgid "TacticalRMM base URL"
+msgstr "URL de base TacticalRMM"
+
+msgid "Open in TacticalRMM"
+msgstr "Ouvrir dans TacticalRMM"
+
+msgid "Open TacticalRMM Take Control session in a new tab"
+msgstr "Ouvrir une session TacticalRMM Take Control dans un nouvel onglet"
