@@ -13,10 +13,11 @@ This plugin improves that workflow by displaying a clickable TacticalRMM button 
 ## Features
 
 * Adds a TacticalRMM button on Computer assets
+* Configurable TacticalRMM base URL from plugin settings
 * Uses inventoried remote management data already present in GLPI
 * Opens the device directly in TacticalRMM Take Control
-* Reduces manual search time for technicians
-* Keeps the integration simple and lightweight
+* Supports English and French translations
+* Improved placement for read-only profile visibility
 * Designed for easy deployment in Docker and standard GLPI installations
 
 ## How it works
@@ -37,8 +38,8 @@ This gives technicians one-click access to the device from the GLPI computer rec
 | TacticalRMM direct link | Yes     |
 | Lightweight integration | Yes     |
 | Ticket form integration | No      |
-| Settings page           | Planned |
-| Translation support     | Planned |
+| Settings page           | Yes     |
+| Translation support     | EN/FR   |
 
 ## Target use case
 
@@ -88,11 +89,8 @@ Build local release archives:
 
 ## Roadmap
 
-* Add configurable TacticalRMM base URL in plugin settings
-* Improve compatibility across more GLPI versions
-* Add English and French translations
-* Improve UI placement for read-only profiles
-* Publish stable GitHub Releases with `.tar.gz` and `.zip`
+* Ticket form integration
+* Additional remote data source mapping
 * Prepare the project for broader GLPI ecosystem distribution
 
 ## Contributing
