@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/inc/Config.php';
+
 use Plugin\TacticalRMMRemote\Config;
 
 function plugin_tacticalrmmremote_install() {
