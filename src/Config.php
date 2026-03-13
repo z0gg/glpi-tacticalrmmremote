@@ -61,18 +61,11 @@ class Config {
          return null;
       }
 
-      $base_url = self::getBaseUrl();
       if (preg_match('/^https?:\/\//i', $remote_id) === 1) {
-         if ($base_url === '') {
-            return $remote_id;
-         }
-
-         $remote_id = RemoteResolver::normalizeRemoteValue($remote_id);
-         if ($remote_id === null || preg_match('/^https?:\/\//i', $remote_id) === 1) {
-            return null;
-         }
+         return $remote_id;
       }
 
+      $base_url = self::getBaseUrl();
       $template = self::getUrlTemplate();
       if ($base_url === '' && preg_match('/^https?:\/\//i', $template) !== 1) {
          return null;
@@ -97,31 +90,6 @@ class Config {
       }
 
       return sprintf('%s/%s', rtrim($base_url, '/'), ltrim($target, '/'));
-   }
-
-   public static function inspectTakeControlUrl(string $remote_id): array {
-      $url = self::buildTakeControlUrl($remote_id);
-      $issues = [];
-
-      if ($url === null) {
-         $issues[] = 'missing_target';
-      } else {
-         $path = strtolower((string)(parse_url($url, PHP_URL_PATH) ?? ''));
-         if ($path !== '' && (str_contains($path, '/api/') || str_contains($path, 'inventory'))) {
-            $issues[] = 'api_target';
-         }
-
-         $base_host = strtolower((string)(parse_url(self::getBaseUrl(), PHP_URL_HOST) ?? ''));
-         $target_host = strtolower((string)(parse_url($url, PHP_URL_HOST) ?? ''));
-         if ($base_host !== '' && $target_host !== '' && $base_host !== $target_host) {
-            $issues[] = 'host_mismatch';
-         }
-      }
-
-      return [
-         'url'    => $url,
-         'issues' => $issues,
-      ];
    }
 
    public static function getMenuName(): string {

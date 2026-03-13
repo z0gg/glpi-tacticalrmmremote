@@ -7,6 +7,11 @@ class RemoteResolver {
     * Resolve a TacticalRMM remote identifier from known fields or inventory tables.
     */
    public static function resolveFromComputer(\Computer $computer): ?string {
+      $remote_id = self::resolveFromRemoteManagementTables((int)$computer->fields['id']);
+      if ($remote_id !== null) {
+         return $remote_id;
+      }
+
       $direct_fields = [
          'tacticalrmm_remote_id',
          'tacticalrmm_id',
@@ -20,7 +25,7 @@ class RemoteResolver {
          }
       }
 
-      return self::resolveFromRemoteManagementTables((int)$computer->fields['id']);
+      return null;
    }
 
    private static function resolveFromRemoteManagementTables(int $computer_id): ?string {
@@ -51,61 +56,61 @@ class RemoteResolver {
             'WHERE' => $criteria,
          ]);
 
+         $best_remote_id = null;
+         $best_score = PHP_INT_MIN;
+
          foreach ($iterator as $row) {
-            if (!self::looksLikeTacticalRmmRow($row)) {
+            $remote_id = self::extractRemoteIdFromRow($row);
+            if ($remote_id === null) {
                continue;
             }
 
-            $remote_id = self::extractRemoteIdFromRow($row);
-            if ($remote_id !== null) {
-               return $remote_id;
+            $score = self::scoreRemoteManagementRow($row);
+            if ($score > $best_score) {
+               $best_score = $score;
+               $best_remote_id = $remote_id;
             }
+         }
+
+         if ($best_remote_id !== null) {
+            return $best_remote_id;
          }
       }
 
       return null;
    }
 
-   private static function looksLikeTacticalRmmRow(array $row): bool {
-      $positive_patterns = [
-         'tactical',
-         'tacticalrmm',
-         'takecontrol',
-         'meshcentral',
-         'mesh',
-      ];
-
-      foreach (['name', 'type', 'provider', 'tool'] as $field) {
-         if (empty($row[$field])) {
-            continue;
-         }
-
-         $value = strtolower((string)$row[$field]);
-         foreach ($positive_patterns as $pattern) {
-            if (str_contains($value, $pattern)) {
-               return true;
-            }
+   private static function scoreRemoteManagementRow(array $row): int {
+      $signals = [];
+      foreach (['type', 'provider', 'tool', 'name', 'comments'] as $field) {
+         if (!empty($row[$field])) {
+            $signals[] = strtolower(trim((string)$row[$field]));
          }
       }
 
-      foreach (['url', 'link'] as $field) {
-         if (empty($row[$field])) {
-            continue;
+      foreach ($signals as $signal) {
+         if ($signal === 'tacticalrmm') {
+            return 1000;
          }
 
-         $value = strtolower((string)$row[$field]);
-         if (str_contains($value, '/api/') || str_contains($value, 'inventory')) {
-            return false;
+         if (str_contains($signal, 'tacticalrmm')) {
+            return 900;
          }
 
-         foreach ($positive_patterns as $pattern) {
-            if (str_contains($value, $pattern)) {
-               return true;
-            }
+         if (str_contains($signal, 'tactical')) {
+            return 800;
+         }
+
+         if ($signal === 'meshcentral' || $signal === 'mesh') {
+            return 200;
+         }
+
+         if (str_contains($signal, 'meshcentral') || str_contains($signal, 'mesh')) {
+            return 150;
          }
       }
 
-      return !empty($row['remoteid']) || !empty($row['remote_id']);
+      return 0;
    }
 
    private static function extractRemoteIdFromRow(array $row): ?string {
@@ -115,8 +120,7 @@ class RemoteResolver {
          'value',
          'uid',
          'identifier',
-         'url',
-         'link',
+         'name',
       ];
 
       foreach ($id_candidates as $field) {
@@ -135,62 +139,6 @@ class RemoteResolver {
 
    public static function normalizeRemoteValue(string $value): ?string {
       $value = trim($value);
-      if ($value === '') {
-         return null;
-      }
-
-      if (preg_match('/^https?:\/\//i', $value) !== 1) {
-         return $value;
-      }
-
-      return self::extractIdentifierFromUrl($value) ?? $value;
-   }
-
-   private static function extractIdentifierFromUrl(string $value): ?string {
-      if (preg_match('/^https?:\/\//i', $value) !== 1) {
-         return null;
-      }
-
-      $path = (string)(parse_url($value, PHP_URL_PATH) ?? '');
-      if ($path === '') {
-         return null;
-      }
-
-      $segments = array_values(array_filter(explode('/', trim($path, '/')), static function ($segment) {
-         return $segment !== '';
-      }));
-      if ($segments === []) {
-         return null;
-      }
-
-      $ignored_segments = [
-         'api',
-         'v1',
-         'v2',
-         'v3',
-         'agents',
-         'agent',
-         'inventory',
-         'mesh',
-         'meshcentral',
-         'control',
-         'takecontrol',
-         'remote',
-      ];
-
-      for ($index = count($segments) - 1; $index >= 0; $index--) {
-         $segment = rawurldecode((string)$segments[$index]);
-         if ($segment === '') {
-            continue;
-         }
-
-         if (in_array(strtolower($segment), $ignored_segments, true)) {
-            continue;
-         }
-
-         return $segment;
-      }
-
-      return null;
+      return $value !== '' ? $value : null;
    }
 }
