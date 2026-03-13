@@ -13,6 +13,10 @@ All notable changes to this project should be written here.
 
 ## Unreleased
 
+- Refactored plugin classes into `src/` and aligned the Computer display hook with GLPI 11 callback conventions.
+- Reworked the Computer action rendering to output a standard form row instead of moving DOM elements with JavaScript.
+- Added settings page resource buttons for Homepage, Get help, and Readme.
+- Added plugin metadata assets and a dedicated plugin icon.
 - Added explicit GLPI plugin configuration registration (`config_page` + `menu_toadd`) and a `front/config.php` entry point for GLPI 11 compatibility.
 - Extended configuration with a URL template field to support both TacticalRMM and MeshCentral link formats.
 - Improved remote identifier resolution by accepting URL/link fields and full URL values from inventory rows.

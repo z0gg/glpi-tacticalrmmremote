@@ -11,9 +11,9 @@ function plugin_init_tacticalrmmremote() {
 
    // Ensure plugin classes are available even when Composer autoload is not installed.
    $class_files = [
-      __DIR__ . '/inc/Config.php',
-      __DIR__ . '/inc/RemoteResolver.php',
-      __DIR__ . '/inc/ComputerHook.php',
+      __DIR__ . '/src/Config.php',
+      __DIR__ . '/src/RemoteResolver.php',
+      __DIR__ . '/src/ComputerHook.php',
    ];
 
    foreach ($class_files as $file) {
@@ -28,9 +28,8 @@ function plugin_init_tacticalrmmremote() {
       'config' => 'Plugin\\TacticalRMMRemote\\Config',
    ];
 
-   // Compatibility with multiple GLPI branches: use legacy string keys.
    $PLUGIN_HOOKS['post_item_form']['tacticalrmmremote'] = [
-      'Computer' => 'Plugin\\TacticalRMMRemote\\ComputerHook::postItemForm',
+      'Computer' => [Plugin\TacticalRMMRemote\ComputerHook::class, 'postItemForm'],
    ];
 }
 

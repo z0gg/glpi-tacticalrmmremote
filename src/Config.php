@@ -8,6 +8,9 @@ class Config {
    public const KEY_URL_TEMPLATE = 'url_template';
    public const DEFAULT_BASE_URL = '';
    public const DEFAULT_URL_TEMPLATE = '/takecontrol/{id}';
+   public const GITHUB_URL = 'https://github.com/z0gg/glpi-tacticalrmmremote';
+   public const ISSUES_URL = 'https://github.com/z0gg/glpi-tacticalrmmremote/issues';
+   public const README_URL = 'https://github.com/z0gg/glpi-tacticalrmmremote#readme';
 
    public static function getBaseUrl(): string {
       $config = \Config::getConfigurationValues(self::CONTEXT);
@@ -94,7 +97,30 @@ class Config {
       return [
          'title' => self::getMenuName(),
          'page'  => '/plugins/tacticalrmmremote/front/config.php',
-         'icon'  => 'ti ti-rectangle-vertical-filled',
+         'icon'  => 'ti ti-device-desktop-share',
+      ];
+   }
+
+   public static function getResourceLinks(): array {
+      return [
+         [
+            'label' => __('Homepage', 'tacticalrmmremote'),
+            'title' => __('Open the GitHub project page', 'tacticalrmmremote'),
+            'url'   => self::GITHUB_URL,
+            'icon'  => 'ti ti-home',
+         ],
+         [
+            'label' => __('Get help', 'tacticalrmmremote'),
+            'title' => __('Open the GitHub issues page', 'tacticalrmmremote'),
+            'url'   => self::ISSUES_URL,
+            'icon'  => 'ti ti-bug',
+         ],
+         [
+            'label' => __('Readme', 'tacticalrmmremote'),
+            'title' => __('Open the GitHub README', 'tacticalrmmremote'),
+            'url'   => self::README_URL,
+            'icon'  => 'ti ti-book',
+         ],
       ];
    }
 

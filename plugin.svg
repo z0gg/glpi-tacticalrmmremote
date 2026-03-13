@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title>TacticalRMM Remote icon</title>
+  <desc>Stylized desktop monitor with a remote link badge.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1f3a"/>
+      <stop offset="55%" stop-color="#113b67"/>
+      <stop offset="100%" stop-color="#1d6fa5"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb703"/>
+      <stop offset="100%" stop-color="#fb8500"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="10" width="108" height="108" rx="24" fill="url(#bg)"/>
+  <rect x="25" y="28" width="78" height="49" rx="8" fill="#f7fbff" opacity="0.98"/>
+  <rect x="31" y="34" width="66" height="33" rx="5" fill="#d7e7f5"/>
+  <path d="M52 87h24" stroke="#f7fbff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M43 97h42" stroke="#8db3d3" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="89" cy="43" r="17" fill="url(#accent)"/>
+  <path d="M82 43a7 7 0 0 1 7-7h5" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+  <path d="M96 43a7 7 0 0 1-7 7h-5" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+  <path d="M44 55l11-11 8 8 17-17" fill="none" stroke="#1d6fa5" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

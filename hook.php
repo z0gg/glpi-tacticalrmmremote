@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/inc/Config.php';
+require_once __DIR__ . '/src/Config.php';
 
 use Plugin\TacticalRMMRemote\Config;
 

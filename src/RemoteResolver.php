@@ -73,7 +73,6 @@ class RemoteResolver {
          }
       }
 
-      // If no explicit provider exists, still allow extraction as a fallback.
       return true;
    }
 
@@ -89,21 +88,23 @@ class RemoteResolver {
       ];
 
       foreach ($id_candidates as $field) {
-         if (!empty($row[$field])) {
-            $value = trim((string)$row[$field]);
-            if ($value === '') {
-               continue;
-            }
-
-            if (in_array($field, ['url', 'link'], true)) {
-               $identifier = self::extractIdentifierFromUrl($value);
-               if ($identifier !== null) {
-                  return $identifier;
-               }
-            }
-
-            return $value;
+         if (empty($row[$field])) {
+            continue;
          }
+
+         $value = trim((string)$row[$field]);
+         if ($value === '') {
+            continue;
+         }
+
+         if (in_array($field, ['url', 'link'], true)) {
+            $identifier = self::extractIdentifierFromUrl($value);
+            if ($identifier !== null) {
+               return $identifier;
+            }
+         }
+
+         return $value;
       }
 
       return null;

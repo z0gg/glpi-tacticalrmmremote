@@ -17,7 +17,8 @@ This plugin improves that workflow by displaying a clickable TacticalRMM button 
 * Uses inventoried remote management data already present in GLPI
 * Opens the device directly in TacticalRMM Take Control
 * Supports English and French translations
-* Improved placement for read-only profile visibility
+* Provides quick access buttons for homepage, help, and README from the settings page
+* Includes a dedicated plugin icon asset for cleaner GLPI presentation
 * Designed for easy deployment in Docker and standard GLPI installations
 
 ## How it works
@@ -67,6 +68,7 @@ Then in GLPI:
 * Open Plugins
 * Click Install
 * Click Enable
+* Open Setup > TacticalRMM Remote to configure the base URL and resource links
 
 ## Requirements
 
@@ -86,6 +88,12 @@ Clone the repository:
 Build local release archives:
 
 `bash scripts/package-release.sh v0.1.0`
+
+## Resources
+
+* Homepage: `https://github.com/z0gg/glpi-tacticalrmmremote`
+* Get help: `https://github.com/z0gg/glpi-tacticalrmmremote/issues`
+* Readme: `https://github.com/z0gg/glpi-tacticalrmmremote#readme`
 
 ## Roadmap
 

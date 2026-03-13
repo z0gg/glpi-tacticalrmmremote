@@ -22,3 +22,33 @@ msgstr "Modèle d'URL distante"
 
 msgid "Use {id} for URL-encoded ID or {raw_id} for raw value. Put a full URL to support MeshCentral links."
 msgstr "Utilisez {id} pour un identifiant encodé ou {raw_id} pour la valeur brute. Vous pouvez aussi mettre une URL complète pour MeshCentral."
+
+msgid "Resources"
+msgstr "Ressources"
+
+msgid "Project links and documentation for this plugin."
+msgstr "Liens du projet et documentation pour ce plugin."
+
+msgid "Homepage"
+msgstr "Accueil"
+
+msgid "Get help"
+msgstr "Obtenir de l'aide"
+
+msgid "Readme"
+msgstr "Readme"
+
+msgid "Open the GitHub project page"
+msgstr "Ouvrir la page GitHub du projet"
+
+msgid "Open the GitHub issues page"
+msgstr "Ouvrir la page GitHub des tickets"
+
+msgid "Open the GitHub README"
+msgstr "Ouvrir le README GitHub"
+
+msgid "Detected remote identifier"
+msgstr "Identifiant distant détecté"
+
+msgid "TacticalRMM remote access"
+msgstr "Accès distant TacticalRMM"
