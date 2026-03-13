@@ -13,7 +13,7 @@ This plugin improves that workflow by displaying a clickable TacticalRMM button 
 ## Features
 
 * Adds a TacticalRMM button on Computer assets
-* Configurable TacticalRMM base URL from plugin settings
+* Configurable base URL and URL template from plugin settings (works for TacticalRMM and MeshCentral)
 * Uses inventoried remote management data already present in GLPI
 * Opens the device directly in TacticalRMM Take Control
 * Supports English and French translations

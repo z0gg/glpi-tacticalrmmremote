@@ -6,8 +6,11 @@ use Plugin\TacticalRMMRemote\Config;
 
 function plugin_tacticalrmmremote_install() {
    $current = \Config::getConfigurationValues(Config::CONTEXT);
-   if (!isset($current[Config::KEY_BASE_URL])) {
-      Config::saveBaseUrl('');
+   if (!isset($current[Config::KEY_BASE_URL]) || !isset($current[Config::KEY_URL_TEMPLATE])) {
+      Config::saveSettings(
+         $current[Config::KEY_BASE_URL] ?? '',
+         $current[Config::KEY_URL_TEMPLATE] ?? Config::DEFAULT_URL_TEMPLATE
+      );
    }
 
    return true;

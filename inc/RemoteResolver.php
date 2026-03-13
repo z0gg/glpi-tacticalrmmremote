@@ -79,6 +79,8 @@ class RemoteResolver {
 
    private static function extractRemoteIdFromRow(array $row): ?string {
       $id_candidates = [
+         'url',
+         'link',
          'remoteid',
          'remote_id',
          'value',

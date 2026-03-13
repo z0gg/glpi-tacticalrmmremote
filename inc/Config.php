@@ -5,7 +5,9 @@ namespace Plugin\TacticalRMMRemote;
 class Config {
    public const CONTEXT = 'plugin:tacticalrmmremote';
    public const KEY_BASE_URL = 'base_url';
+   public const KEY_URL_TEMPLATE = 'url_template';
    public const DEFAULT_BASE_URL = '';
+   public const DEFAULT_URL_TEMPLATE = '/takecontrol/{id}';
 
    public static function getBaseUrl(): string {
       $config = \Config::getConfigurationValues(self::CONTEXT);
@@ -20,14 +22,80 @@ class Config {
       ]);
    }
 
+   public static function getUrlTemplate(): string {
+      $config = \Config::getConfigurationValues(self::CONTEXT);
+      $value = trim((string)($config[self::KEY_URL_TEMPLATE] ?? self::DEFAULT_URL_TEMPLATE));
+
+      return $value !== '' ? $value : self::DEFAULT_URL_TEMPLATE;
+   }
+
+   public static function saveUrlTemplate(string $template): void {
+      $template = trim($template);
+      if ($template === '') {
+         $template = self::DEFAULT_URL_TEMPLATE;
+      }
+
+      \Config::setConfigurationValues(self::CONTEXT, [
+         self::KEY_URL_TEMPLATE => $template,
+      ]);
+   }
+
+   public static function saveSettings(string $base_url, string $url_template): void {
+      $url_template = trim($url_template);
+      if ($url_template === '') {
+         $url_template = self::DEFAULT_URL_TEMPLATE;
+      }
+
+      \Config::setConfigurationValues(self::CONTEXT, [
+         self::KEY_BASE_URL     => self::normalizeBaseUrl($base_url),
+         self::KEY_URL_TEMPLATE => $url_template,
+      ]);
+   }
+
    public static function buildTakeControlUrl(string $remote_id): ?string {
-      $base_url = self::getBaseUrl();
       $remote_id = trim($remote_id);
-      if ($base_url === '' || $remote_id === '') {
+      if ($remote_id === '') {
          return null;
       }
 
-      return sprintf('%s/takecontrol/%s', $base_url, rawurlencode($remote_id));
+      if (preg_match('/^https?:\/\//i', $remote_id) === 1) {
+         return $remote_id;
+      }
+
+      $base_url = self::getBaseUrl();
+      $template = self::getUrlTemplate();
+
+      $target = str_replace(
+         ['{id}', '{raw_id}'],
+         [rawurlencode($remote_id), $remote_id],
+         $template
+      );
+
+      if (preg_match('/^https?:\/\//i', $target) === 1) {
+         return $target;
+      }
+
+      if ($base_url === '') {
+         return null;
+      }
+
+      if ($target === '') {
+         return $base_url;
+      }
+
+      return sprintf('%s/%s', rtrim($base_url, '/'), ltrim($target, '/'));
+   }
+
+   public static function getMenuName(): string {
+      return __('TacticalRMM Remote', 'tacticalrmmremote');
+   }
+
+   public static function getMenuContent(): array {
+      return [
+         'title' => self::getMenuName(),
+         'page'  => '/plugins/tacticalrmmremote/front/config.php',
+         'icon'  => 'ti ti-rectangle-vertical-filled',
+      ];
    }
 
    private static function normalizeBaseUrl(string $base_url): string {
