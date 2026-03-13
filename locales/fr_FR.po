@@ -28,3 +28,42 @@ msgstr "Identifiant distant détecté"
 
 msgid "TacticalRMM remote access"
 msgstr "Accès distant TacticalRMM"
+
+msgid "Missing or invalid Computer ID."
+msgstr "Identifiant d'ordinateur manquant ou invalide."
+
+msgid "Computer not found."
+msgstr "Ordinateur introuvable."
+
+msgid "No TacticalRMM remote identifier was found for this Computer."
+msgstr "Aucun identifiant TacticalRMM n'a été trouvé pour cet ordinateur."
+
+msgid "Target URL points to an API or inventory endpoint."
+msgstr "L'URL cible pointe vers un endpoint d'API ou d'inventaire."
+
+msgid "Target URL host does not match the configured TacticalRMM base URL."
+msgstr "L'hote de l'URL cible ne correspond pas a l'URL de base TacticalRMM configuree."
+
+msgid "Unable to build a valid TacticalRMM URL from the detected identifier."
+msgstr "Impossible de construire une URL TacticalRMM valide a partir de l'identifiant detecte."
+
+msgid "The generated remote URL looks unsafe and was not opened automatically."
+msgstr "L'URL distante generee semble non sure et n'a pas ete ouverte automatiquement."
+
+msgid "Remote launch blocked"
+msgstr "Ouverture distante bloquee"
+
+msgid "Resolved remote identifier"
+msgstr "Identifiant distant resolu"
+
+msgid "Generated remote URL"
+msgstr "URL distante generee"
+
+msgid "Reason"
+msgstr "Raison"
+
+msgid "Back to Computer"
+msgstr "Retour a l'ordinateur"
+
+msgid "Open anyway"
+msgstr "Ouvrir quand meme"
