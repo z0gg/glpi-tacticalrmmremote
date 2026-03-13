@@ -16,3 +16,9 @@ msgstr "Ouvrir dans TacticalRMM"
 
 msgid "Open TacticalRMM Take Control session in a new tab"
 msgstr "Ouvrir une session TacticalRMM Take Control dans un nouvel onglet"
+
+msgid "Remote URL template"
+msgstr "Modèle d'URL distante"
+
+msgid "Use {id} for URL-encoded ID or {raw_id} for raw value. Put a full URL to support MeshCentral links."
+msgstr "Utilisez {id} pour un identifiant encodé ou {raw_id} pour la valeur brute. Vous pouvez aussi mettre une URL complète pour MeshCentral."

@@ -23,6 +23,10 @@ function plugin_init_tacticalrmmremote() {
    }
 
    $PLUGIN_HOOKS[Hooks::CSRF_COMPLIANT]['tacticalrmmremote'] = true;
+   $PLUGIN_HOOKS['config_page']['tacticalrmmremote'] = 'front/config.php';
+   $PLUGIN_HOOKS['menu_toadd']['tacticalrmmremote'] = [
+      'config' => 'Plugin\\TacticalRMMRemote\\Config',
+   ];
 
    // Compatibility with multiple GLPI branches: use legacy string keys.
    $PLUGIN_HOOKS['post_item_form']['tacticalrmmremote'] = [
@@ -60,5 +64,5 @@ function plugin_tacticalrmmremote_have_config() {
 }
 
 function plugin_tacticalrmmremote_getConfigPage() {
-   return 'front/config.form.php';
+   return 'front/config.php';
 }

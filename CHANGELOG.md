@@ -11,6 +11,12 @@ All notable changes to this project should be written here.
 - Improved action visibility for read-only profiles with safer placement logic
 - Hardened release workflow to publish stable versioned archives without `v` prefix in plugin metadata
 
+## Unreleased
+
+- Added explicit GLPI plugin configuration registration (`config_page` + `menu_toadd`) and a `front/config.php` entry point for GLPI 11 compatibility.
+- Extended configuration with a URL template field to support both TacticalRMM and MeshCentral link formats.
+- Improved remote identifier resolution by accepting URL/link fields and full URL values from inventory rows.
+
 ## v0.1.0
 
 - Initial public repository skeleton
