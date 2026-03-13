@@ -23,6 +23,7 @@ $base_url = Config::getBaseUrl();
 $url_template = Config::getUrlTemplate();
 
 echo "<form method='post' action='" . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . "'>";
+echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
 echo "<div class='center' style='max-width: 820px'>";
 echo "<table class='tab_cadre_fixe'>";
 echo "<tr><th colspan='2'>" . htmlspecialchars(__('TacticalRMM settings', 'tacticalrmmremote'), ENT_QUOTES) . "</th></tr>";
