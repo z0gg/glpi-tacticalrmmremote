@@ -23,30 +23,6 @@ msgstr "Remote URL template"
 msgid "Use {id} for URL-encoded ID or {raw_id} for raw value. Put a full URL to support MeshCentral links."
 msgstr "Use {id} for URL-encoded ID or {raw_id} for raw value. Put a full URL to support MeshCentral links."
 
-msgid "Resources"
-msgstr "Resources"
-
-msgid "Project links and documentation for this plugin."
-msgstr "Project links and documentation for this plugin."
-
-msgid "Homepage"
-msgstr "Homepage"
-
-msgid "Get help"
-msgstr "Get help"
-
-msgid "Readme"
-msgstr "Readme"
-
-msgid "Open the GitHub project page"
-msgstr "Open the GitHub project page"
-
-msgid "Open the GitHub issues page"
-msgstr "Open the GitHub issues page"
-
-msgid "Open the GitHub README"
-msgstr "Open the GitHub README"
-
 msgid "Detected remote identifier"
 msgstr "Detected remote identifier"
 

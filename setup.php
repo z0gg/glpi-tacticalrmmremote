@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/src/Config.php';
+
 use Glpi\Plugin\Hooks;
 
 define('PLUGIN_TACTICALRMMREMOTE_VERSION', '0.2.0');
@@ -39,7 +41,9 @@ function plugin_version_tacticalrmmremote() {
       'version'      => PLUGIN_TACTICALRMMREMOTE_VERSION,
       'author'       => 'z0gg',
       'license'      => 'GPLv2+',
-      'homepage'     => 'https://github.com/z0gg/glpi-tacticalrmmremote',
+      'homepage'     => Plugin\TacticalRMMRemote\Config::GITHUB_URL,
+      'issues'       => Plugin\TacticalRMMRemote\Config::ISSUES_URL,
+      'readme'       => Plugin\TacticalRMMRemote\Config::README_URL,
       'requirements' => [
          'glpi' => [
             'min' => PLUGIN_TACTICALRMMREMOTE_MIN_GLPI,

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <name>TacticalRMM Remote</name>
+  <key>tacticalrmmremote</key>
+  <state>stable</state>
+  <logo>https://raw.githubusercontent.com/z0gg/glpi-tacticalrmmremote/refs/heads/main/tacticalrmmremote.png</logo>
+  <description>
+    <short>
+      <en>Direct TacticalRMM remote access from GLPI Computer assets.</en>
+      <fr>Acces distant TacticalRMM direct depuis les ordinateurs GLPI.</fr>
+    </short>
+    <long>
+      <en>Display a TacticalRMM action on Computer assets using inventoried remote management data and configurable remote URL templates.</en>
+      <fr>Affiche une action TacticalRMM sur les ordinateurs a partir des donnees de gestion a distance inventoriees et d'un modele d'URL configurable.</fr>
+    </long>
+  </description>
+  <homepage>https://github.com/z0gg/glpi-tacticalrmmremote</homepage>
+  <download>https://github.com/z0gg/glpi-tacticalrmmremote/releases/latest</download>
+  <issues>https://github.com/z0gg/glpi-tacticalrmmremote/issues</issues>
+  <readme>https://github.com/z0gg/glpi-tacticalrmmremote#readme</readme>
+  <authors>
+    <author>z0gg</author>
+  </authors>
+  <versions>
+    <version>
+      <num>0.2.0</num>
+      <compatibility>~10.0.0 || ~11.0.0</compatibility>
+      <download_url>https://github.com/z0gg/glpi-tacticalrmmremote/releases/latest/download/tacticalrmmremote.tar.gz</download_url>
+    </version>
+  </versions>
+  <langs>
+    <lang>en_GB</lang>
+    <lang>fr_FR</lang>
+  </langs>
+  <license>GPL v2+</license>
+  <tags>
+    <en>
+      <tag>remote</tag>
+      <tag>tacticalrmm</tag>
+      <tag>assets</tag>
+    </en>
+    <fr>
+      <tag>remote</tag>
+      <tag>tacticalrmm</tag>
+      <tag>parc</tag>
+    </fr>
+  </tags>
+</root>

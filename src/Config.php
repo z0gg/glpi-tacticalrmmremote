@@ -61,12 +61,22 @@ class Config {
          return null;
       }
 
+      $base_url = self::getBaseUrl();
       if (preg_match('/^https?:\/\//i', $remote_id) === 1) {
-         return $remote_id;
+         if ($base_url === '') {
+            return $remote_id;
+         }
+
+         $remote_id = RemoteResolver::normalizeRemoteValue($remote_id);
+         if ($remote_id === null || preg_match('/^https?:\/\//i', $remote_id) === 1) {
+            return null;
+         }
       }
 
-      $base_url = self::getBaseUrl();
       $template = self::getUrlTemplate();
+      if ($base_url === '' && preg_match('/^https?:\/\//i', $template) !== 1) {
+         return null;
+      }
 
       $target = str_replace(
          ['{id}', '{raw_id}'],
@@ -98,29 +108,6 @@ class Config {
          'title' => self::getMenuName(),
          'page'  => '/plugins/tacticalrmmremote/front/config.php',
          'icon'  => 'ti ti-device-desktop-share',
-      ];
-   }
-
-   public static function getResourceLinks(): array {
-      return [
-         [
-            'label' => __('Homepage', 'tacticalrmmremote'),
-            'title' => __('Open the GitHub project page', 'tacticalrmmremote'),
-            'url'   => self::GITHUB_URL,
-            'icon'  => 'ti ti-home',
-         ],
-         [
-            'label' => __('Get help', 'tacticalrmmremote'),
-            'title' => __('Open the GitHub issues page', 'tacticalrmmremote'),
-            'url'   => self::ISSUES_URL,
-            'icon'  => 'ti ti-bug',
-         ],
-         [
-            'label' => __('Readme', 'tacticalrmmremote'),
-            'title' => __('Open the GitHub README', 'tacticalrmmremote'),
-            'url'   => self::README_URL,
-            'icon'  => 'ti ti-book',
-         ],
       ];
    }
 

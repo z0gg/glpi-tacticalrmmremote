@@ -21,7 +21,6 @@ Html::header(__('TacticalRMM Remote', 'tacticalrmmremote'), $_SERVER['PHP_SELF']
 
 $base_url = Config::getBaseUrl();
 $url_template = Config::getUrlTemplate();
-$resource_links = Config::getResourceLinks();
 
 echo "<form method='post' action='" . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . "'>";
 echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
@@ -36,18 +35,6 @@ echo "<tr class='tab_bg_1'>";
 echo "<td>" . htmlspecialchars(__('Remote URL template', 'tacticalrmmremote'), ENT_QUOTES) . "</td>";
 echo "<td><input type='text' class='form-control' name='url_template' value='" . htmlspecialchars($url_template, ENT_QUOTES) . "' placeholder='/takecontrol/{id}' size='60'>";
 echo "<small class='text-muted d-block mt-1'>" . htmlspecialchars(__('Use {id} for URL-encoded ID or {raw_id} for raw value. Put a full URL to support MeshCentral links.', 'tacticalrmmremote'), ENT_QUOTES) . "</small></td>";
-echo "</tr>";
-echo "<tr class='tab_bg_1'>";
-echo "<td>" . htmlspecialchars(__('Resources', 'tacticalrmmremote'), ENT_QUOTES) . "</td>";
-echo "<td>";
-foreach ($resource_links as $link) {
-   echo "<a class='btn btn-outline-secondary me-2 mb-2' target='_blank' rel='noopener noreferrer' href='" . htmlspecialchars($link['url'], ENT_QUOTES) . "' title='" . htmlspecialchars($link['title'], ENT_QUOTES) . "'>";
-   echo "<i class='" . htmlspecialchars($link['icon'], ENT_QUOTES) . " me-1'></i>";
-   echo htmlspecialchars($link['label'], ENT_QUOTES);
-   echo "</a>";
-}
-echo "<div class='text-muted'><small>" . htmlspecialchars(__('Project links and documentation for this plugin.', 'tacticalrmmremote'), ENT_QUOTES) . "</small></div>";
-echo "</td>";
 echo "</tr>";
 echo "<tr class='tab_bg_1'>";
 echo "<td colspan='2' class='center'>";

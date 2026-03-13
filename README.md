@@ -17,13 +17,14 @@ This plugin improves that workflow by displaying a clickable TacticalRMM button 
 * Uses inventoried remote management data already present in GLPI
 * Opens the device directly in TacticalRMM Take Control
 * Supports English and French translations
-* Provides quick access buttons for homepage, help, and README from the settings page
-* Includes a dedicated plugin icon asset for cleaner GLPI presentation
+* Includes plugin catalog metadata and a dedicated icon for cleaner GLPI presentation
 * Designed for easy deployment in Docker and standard GLPI installations
 
 ## How it works
 
 When a computer has a TacticalRMM remote management entry inventoried in GLPI, the plugin builds a direct URL using your TacticalRMM server base address and the detected remote identifier.
+
+If the inventory contains a full remote-management URL instead of a plain identifier, the plugin normalizes it back to an identifier before rebuilding the final TacticalRMM link.
 
 Example format:
 
@@ -68,7 +69,7 @@ Then in GLPI:
 * Open Plugins
 * Click Install
 * Click Enable
-* Open Setup > TacticalRMM Remote to configure the base URL and resource links
+* Open Setup > TacticalRMM Remote to configure the base URL and remote template
 
 ## Requirements
 
