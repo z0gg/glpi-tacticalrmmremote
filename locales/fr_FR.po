@@ -67,3 +67,9 @@ msgstr "Retour a l'ordinateur"
 
 msgid "Open anyway"
 msgstr "Ouvrir quand meme"
+
+msgid "File configuration override is active: %s"
+msgstr "La configuration fichier est active : %s"
+
+msgid "Config file path: %s"
+msgstr "Chemin du fichier de configuration : %s"

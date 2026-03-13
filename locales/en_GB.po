@@ -67,3 +67,9 @@ msgstr "Back to Computer"
 
 msgid "Open anyway"
 msgstr "Open anyway"
+
+msgid "File configuration override is active: %s"
+msgstr "File configuration override is active: %s"
+
+msgid "Config file path: %s"
+msgstr "Config file path: %s"

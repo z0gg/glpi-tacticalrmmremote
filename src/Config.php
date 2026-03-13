@@ -4,6 +4,7 @@ namespace Plugin\TacticalRMMRemote;
 
 class Config {
    public const CONTEXT = 'plugin:tacticalrmmremote';
+   public const FILE_NAME = 'config.cfg';
    public const KEY_BASE_URL = 'base_url';
    public const KEY_URL_TEMPLATE = 'url_template';
    public const DEFAULT_BASE_URL = '';
@@ -13,6 +14,11 @@ class Config {
    public const README_URL = 'https://github.com/z0gg/glpi-tacticalrmmremote#readme';
 
    public static function getBaseUrl(): string {
+      $file_config = self::getFileConfig();
+      if (!empty($file_config[self::KEY_BASE_URL])) {
+         return self::normalizeBaseUrl((string)$file_config[self::KEY_BASE_URL]);
+      }
+
       $config = \Config::getConfigurationValues(self::CONTEXT);
       $value = $config[self::KEY_BASE_URL] ?? self::DEFAULT_BASE_URL;
 
@@ -26,6 +32,12 @@ class Config {
    }
 
    public static function getUrlTemplate(): string {
+      $file_config = self::getFileConfig();
+      if (!empty($file_config[self::KEY_URL_TEMPLATE])) {
+         $value = trim((string)$file_config[self::KEY_URL_TEMPLATE]);
+         return $value !== '' ? $value : self::DEFAULT_URL_TEMPLATE;
+      }
+
       $config = \Config::getConfigurationValues(self::CONTEXT);
       $value = trim((string)($config[self::KEY_URL_TEMPLATE] ?? self::DEFAULT_URL_TEMPLATE));
 
@@ -102,6 +114,54 @@ class Config {
          'page'  => '/plugins/tacticalrmmremote/front/config.php',
          'icon'  => 'ti ti-device-desktop-share',
       ];
+   }
+
+   public static function getConfigFilePath(): string {
+      return dirname(__DIR__) . '/' . self::FILE_NAME;
+   }
+
+   public static function hasFileConfigOverride(): bool {
+      $config = self::getFileConfig();
+      return !empty($config[self::KEY_BASE_URL]) || !empty($config[self::KEY_URL_TEMPLATE]);
+   }
+
+   private static function getFileConfig(): array {
+      static $cache = null;
+
+      if (is_array($cache)) {
+         return $cache;
+      }
+
+      $cache = [];
+      $path = self::getConfigFilePath();
+      if (!is_readable($path)) {
+         return $cache;
+      }
+
+      $lines = @file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      if (!is_array($lines)) {
+         return $cache;
+      }
+
+      foreach ($lines as $line) {
+         $line = trim($line);
+         if ($line === '' || str_starts_with($line, '#') || str_starts_with($line, ';')) {
+            continue;
+         }
+
+         $parts = explode('=', $line, 2);
+         if (count($parts) !== 2) {
+            continue;
+         }
+
+         $key = trim($parts[0]);
+         $value = trim($parts[1]);
+         if ($key !== '') {
+            $cache[$key] = $value;
+         }
+      }
+
+      return $cache;
    }
 
    private static function normalizeBaseUrl(string $base_url): string {
