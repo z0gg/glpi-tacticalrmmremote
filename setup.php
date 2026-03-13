@@ -9,6 +9,19 @@ define('PLUGIN_TACTICALRMMREMOTE_MAX_GLPI', '11.99.99');
 function plugin_init_tacticalrmmremote() {
    global $PLUGIN_HOOKS;
 
+   // Ensure plugin classes are available even when Composer autoload is not installed.
+   $class_files = [
+      __DIR__ . '/inc/Config.php',
+      __DIR__ . '/inc/RemoteResolver.php',
+      __DIR__ . '/inc/ComputerHook.php',
+   ];
+
+   foreach ($class_files as $file) {
+      if (is_readable($file)) {
+         require_once $file;
+      }
+   }
+
    $PLUGIN_HOOKS[Hooks::CSRF_COMPLIANT]['tacticalrmmremote'] = true;
 
    // Compatibility with multiple GLPI branches: use legacy string keys.
@@ -39,6 +52,10 @@ function plugin_tacticalrmmremote_check_prerequisites() {
 }
 
 function plugin_tacticalrmmremote_check_config($verbose = false) {
+   return true;
+}
+
+function plugin_tacticalrmmremote_have_config() {
    return true;
 }
 
