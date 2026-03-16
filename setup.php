@@ -31,7 +31,7 @@ function plugin_init_tacticalrmmremote() {
    ];
 
    $PLUGIN_HOOKS['post_item_form']['tacticalrmmremote'] = [
-      'Computer' => [Plugin\TacticalRMMRemote\ComputerHook::class, 'postItemForm'],
+      'Computer' => 'Plugin\\TacticalRMMRemote\\ComputerHook::postItemForm',
    ];
 }
 
@@ -42,8 +42,6 @@ function plugin_version_tacticalrmmremote() {
       'author'       => 'z0gg',
       'license'      => 'GPLv2+',
       'homepage'     => Plugin\TacticalRMMRemote\Config::GITHUB_URL,
-      'issues'       => Plugin\TacticalRMMRemote\Config::ISSUES_URL,
-      'readme'       => Plugin\TacticalRMMRemote\Config::README_URL,
       'requirements' => [
          'glpi' => [
             'min' => PLUGIN_TACTICALRMMREMOTE_MIN_GLPI,
