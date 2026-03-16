@@ -1,8 +1,7 @@
 <?php
 
-use Plugin\TacticalRMMRemote\Config;
-
 include('../../../inc/includes.php');
+require_once dirname(__DIR__) . '/inc/functions.php';
 
 Session::checkRight('config', READ);
 
@@ -10,19 +9,21 @@ if (isset($_POST['update'])) {
    Session::checkRight('config', UPDATE);
    Html::checkCSRF();
 
-   $base_url = (string)($_POST['base_url'] ?? '');
-   $url_template = (string)($_POST['url_template'] ?? Config::DEFAULT_URL_TEMPLATE);
-   Config::saveSettings($base_url, $url_template);
+   plugin_tacticalrmmremote_save_settings(
+      isset($_POST['base_url']) ? (string)$_POST['base_url'] : '',
+      isset($_POST['url_template']) ? (string)$_POST['url_template'] : plugin_tacticalrmmremote_get_default_template()
+   );
+
    Session::addMessageAfterRedirect(__('Configuration saved'));
    Html::redirect($CFG_GLPI['root_doc'] . '/plugins/tacticalrmmremote/front/config.php');
 }
 
 Html::header(__('TacticalRMM Remote', 'tacticalrmmremote'), $_SERVER['PHP_SELF'], 'config', 'plugins');
 
-$base_url = Config::getBaseUrl();
-$url_template = Config::getUrlTemplate();
-$config_file_path = Config::getConfigFilePath();
-$has_file_override = Config::hasFileConfigOverride();
+$base_url = plugin_tacticalrmmremote_get_base_url();
+$url_template = plugin_tacticalrmmremote_get_url_template();
+$config_file_path = plugin_tacticalrmmremote_get_config_file_path();
+$has_file_override = plugin_tacticalrmmremote_has_file_override();
 
 echo "<form method='post' action='" . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . "'>";
 echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
