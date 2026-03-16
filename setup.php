@@ -16,17 +16,10 @@ function plugin_init_tacticalrmmremote() {
 
 function plugin_version_tacticalrmmremote() {
    return [
-      'name'         => __('TacticalRMM Remote', 'tacticalrmmremote'),
-      'version'      => PLUGIN_TACTICALRMMREMOTE_VERSION,
-      'author'       => 'z0gg',
-      'license'      => 'GPLv2+',
-      'homepage'     => 'https://github.com/z0gg/glpi-tacticalrmmremote',
-      'requirements' => [
-         'glpi' => [
-            'min' => PLUGIN_TACTICALRMMREMOTE_MIN_GLPI,
-            'max' => PLUGIN_TACTICALRMMREMOTE_MAX_GLPI,
-         ]
-      ]
+      'name'    => 'TacticalRMM Remote',
+      'version' => PLUGIN_TACTICALRMMREMOTE_VERSION,
+      'author'  => 'z0gg',
+      'license' => 'GPLv2+',
    ];
 }
 
