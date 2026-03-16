@@ -1,8 +1,14 @@
 <?php
 
 require_once __DIR__ . '/src/Config.php';
+require_once __DIR__ . '/src/RemoteResolver.php';
+require_once __DIR__ . '/src/ComputerHook.php';
 
 use Plugin\TacticalRMMRemote\Config;
+
+function plugin_tacticalrmmremote_post_item_form($params) {
+   \Plugin\TacticalRMMRemote\ComputerHook::postItemForm((array)$params);
+}
 
 function plugin_tacticalrmmremote_install() {
    $current = \Config::getConfigurationValues(Config::CONTEXT);
